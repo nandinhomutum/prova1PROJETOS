@@ -6,39 +6,53 @@
 package com.UFES.prova1.Model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
  * @author nandi
  */
 public class Funcionario {
+
     private int id;
     private String nome;
     private int idade;
     private double salario;
     private String cargo;
-    private ArrayList<Bonus> bonus = new ArrayList<>();
+    private ArrayList<Bonus> listaBonus = new ArrayList<>();
     private String dataAdmissao;
 
-    public Funcionario(String nome, int idade, double salario, String cargo, String dataAdmissao, ArrayList<Bonus> bonus) {
+    public Funcionario(String nome, int idade, double salario, String cargo, String dataAdmissao, Bonus bonus) {
         this.nome = nome;
         this.idade = idade;
         this.salario = salario;
         this.cargo = cargo;
         this.dataAdmissao = dataAdmissao;
-        this.bonus = bonus;
-        
+        this.addBonus(bonus);
     }
 
-
+    public void addBonus(Bonus bonus) {
+        this.listaBonus.add(bonus);
+    }
     
-    public ArrayList<Bonus> getBonus() {
-        return bonus;
+    boolean isBonus(Bonus bonus){
+        for(Bonus b: listaBonus){
+            if(bonus.getNome().equalsIgnoreCase(b.getNome())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void removeBonus(Bonus bonus) {
+        this.listaBonus.remove(bonus);
     }
 
-    public void setBonus(ArrayList<Bonus> bonus) {
-        this.bonus = bonus;
+    public ArrayList<Bonus> getListaBonus() {
+        return listaBonus;
+    }
+
+    public void setListaBonus(ArrayList<Bonus> bonus) {
+        this.listaBonus = bonus;
     }
 
     public String getNome() {
@@ -88,6 +102,10 @@ public class Funcionario {
     public void setId(int id) {
         this.id = id;
     }
-            
-    
+
+    @Override
+    public String toString() {
+        return "Funcionario{" + "id=" + id + ", nome=" + nome + ", idade=" + idade + ", salario=" + salario + ", cargo=" + cargo + ", " + "dataAdmissao=" + dataAdmissao + '}';
+    }
+
 }

@@ -36,12 +36,11 @@ public class FuncionarioDAO {
     
     public void addFuncionario(Funcionario user){
         
-        Conexao conexao = new Conexao();
-        conexao.connect();  
+        Conexao conexao = (Conexao) new Conexao().connect(); 
         PreparedStatement sql;
 
         try {
-            sql = conexao.prepareStatement("insert into funcionario(idFuncionario, nomeFuncionario, idadeFuncionario, salarioBaseFuncionario, cargo, dataAdmissaoFuncionario) values ('" + user.getNome()+ "','" + user.getSalario()+  "','" + user.getCargo()+ "','" + user.getDataAdmissao()+ "')");
+            sql = conexao.connect().prepareStatement("insert into funcionario(idFuncionario, nomeFuncionario, idadeFuncionario, salarioBaseFuncionario, cargo, dataAdmissaoFuncionario) values ('" + user.getNome()+ "','" + user.getSalario()+  "','" + user.getCargo()+ "','" + user.getDataAdmissao()+ "')");
             sql.executeUpdate();
             JOptionPane.showMessageDialog(null, "Usuário Cadastrado com Sucesso!");
         } catch (SQLException ex) {

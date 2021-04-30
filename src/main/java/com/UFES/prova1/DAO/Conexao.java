@@ -13,17 +13,66 @@ import java.sql.*;
  */
 public class Conexao {
     
-  public static void connect(){
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:bancoDB.db")) {
 
-            System.out.println("Conexão realizada !!!!");
+  private Connection conn;
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    Conexao() {
+    }
+
+    public static Conexao getInstance() {
+        return NewSingletonHolder.INSTANCE;
+    }
+
+    private static class NewSingletonHolder {
+
+        private static final Conexao INSTANCE = new Conexao();
+    }
+
+    public Connection connect() {
+        if (null == this.getConn()) {
+            try {
+                // db parameters  
+                String url = "jdbc:sqlite:bancoDB.db";
+                // create a connection to the database  
+                this.conn = DriverManager.getConnection(url);
+
+                System.out.println("Connection to SQLite has been established.");
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return this.conn;
+    }
+    
+    public void disconect(){
+        if (null != this.getConn()) {        
+            try {                
+              conn.close();
+              System.out.println("Disconected from SQLite.");
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
-    PreparedStatement prepareStatement(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Connection connect(String url) {
+        if (null == this.getConn()) {
+            try {
+                // db parameters                  
+                // create a connection to the database  
+                this.conn = DriverManager.getConnection(url);
+
+                System.out.println("Connection established.");
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return this.conn;
+    }
+
+    private Connection getConn() {
+        return conn;
     }
 }

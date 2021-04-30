@@ -5,31 +5,28 @@
  */
 package com.UFES.prova1.Model;
 
-import java.util.Date;
-
 /**
  *
  * @author nandi
  */
-public class Bonus {
+public class Cargo {
+    
     private int id;
     private String nome;
-    private Date bonus;
-     public Bonus(int id, String nome, Date bonus) {
+
+    public Cargo(String nome) {
+        this.nome = nome;
+    }
+
+    public Cargo(int id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.bonus = bonus;
     }
 
-    public Bonus(String nome, Date bonus) {
-        this.nome = nome;
-        this.bonus = bonus;
+    public Cargo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public int getId() {
-        return id;
-    }
-
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -42,18 +39,10 @@ public class Bonus {
         this.nome = nome;
     }
 
-    public Date getBonus() {
-        return bonus;
+    public void add(Cargo cargo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void setBonus(Date bonus) {
-        this.bonus = bonus;
-    }
-
-    @Override
-    public String toString() {
-        return "Bonus{" + "id=" + id + ", nome=" + nome + ", bonus=" + bonus + '}';
-    }
-
+    
+    
+    
 }
-   
