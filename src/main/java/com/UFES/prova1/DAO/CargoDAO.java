@@ -43,14 +43,8 @@ private static CargoDAO INSTANCE;
       ArrayList<Cargo> cargos = new ArrayList<Cargo>();
        Statement stmt = conn.createStatement();
        ResultSet rs = stmt.executeQuery("SELECT * FROM CARGO");
-       /*if(rs.next()){
-           Usuario usu = new Usuario(rs.getInt("CODUSU"), rs.getString("NOMEUSU"), rs.getString("PASS"), interpretador.interpreta(rs.getString("ADM")));
-           usu.setPermissoes(PermissoesDao.getInstance().get(rs.getInt("CODUSU")));
-           usuarios.add(usu);
-       }*/
        while(rs.next()){
          
-           //usu.setPermissoes(PermissoesDao.getInstance().get(rs.getInt("CODUSU")));
            cargos.add(new Cargo(
                    rs.getInt("id"),
                   rs.getString("nome")

@@ -1,10 +1,13 @@
 
 package com.UFES.prova1.DAO;
 
+import com.UFES.prova1.Model.Cargo;
 import com.UFES.prova1.Model.Funcionario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -73,7 +76,24 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
 
     @Override
     public ArrayList<Funcionario> getAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+       Statement stmt = conn.createStatement();
+       ResultSet rs = stmt.executeQuery("SELECT * FROM FUNCIONARIO");
+       while(rs.next()){
+         
+           funcionarios.add(new Funcionario(rs.getInt("idFuncionario"),
+                   rs.getString("nomeFuncionario"),
+                   rs.getInt("idadeFuncionario"),
+                   rs.getDouble("salarioBaseFuncionario"),
+                   rs.getString("cargo"),
+                   rs.getString("dataAdmissaoFuncionario")
+     
+           ));
+     
+       }
+       stmt.close();
+       return funcionarios;
+       }
+
         
 }

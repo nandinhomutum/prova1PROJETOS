@@ -16,9 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -82,15 +79,13 @@ public class ManterFuncionarioPresenter {
     
     
     public void cadastrarFuncionario() throws SQLException, ParseException{
-        //Date formato = Date.of
-        //String formato = ("dd/MM/yyyy"); 
+
         String nome = view.getTxtNome().getText();
         int idade = Integer.parseInt(view.getTxtIdade().getText());
         double salario = Float.parseFloat(view.getTxtSalario().getText());
         String cargo = view.getCbCargo().getSelectedItem().toString();
         String bonusSelecionado = view.getCbBonus().getSelectedItem().toString();
         String dataAdmissao = view.getTxtAdmissao().getText();
-        //Date dataAdmissao = new SimpleDateFormat(formato).parse(dataA);
         Date data = new Date();
         Bonus bonus = new Bonus(bonusSelecionado, data);
         Funcionario funcionario = new Funcionario(nome, idade, salario, cargo, dataAdmissao, bonus);
@@ -98,11 +93,11 @@ public class ManterFuncionarioPresenter {
     }
     
     public void BuscarCargo () throws SQLException{
-        ArrayList<String> cargos = new ArrayList<String>();
+        ArrayList<String> cargos = new ArrayList<>();
         ArrayList<Cargo> cargoLista = CargoDAO.getCargoDAOInstance().getAll();
-        for(Cargo cargo : cargoLista){
+        cargoLista.forEach(cargo -> {
             cargos.add(cargo.getNome());
-        }
+        });
         ManipuladorComboBox.getInstance().PreencherComboBox(cargos, view.getCbCargo());
     }
 }

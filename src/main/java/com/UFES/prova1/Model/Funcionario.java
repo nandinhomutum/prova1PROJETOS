@@ -32,6 +32,17 @@ public class Funcionario {
         this.addBonus(bonus);
     }
 
+    public Funcionario(int id, String nome, int idade, double salario, String cargo, String dataAdmissao) {
+        this.id = id;
+        this.nome = nome;
+        this.idade = idade;
+        this.salario = salario;
+        this.cargo = cargo;
+        this.dataAdmissao = dataAdmissao;
+    }
+    
+    
+
     public void addBonus(Bonus bonus) {
         this.listaBonus.add(bonus);
     }
