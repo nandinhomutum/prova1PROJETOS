@@ -15,6 +15,8 @@ import com.UFES.prova1.View.TelaManterFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -52,6 +54,8 @@ public class ManterFuncionarioPresenter {
                     cadastrarFuncionario();
                 } catch (SQLException ex) {
                     Logger.getLogger(ManterFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(ManterFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
                 }
                    new BuscarFuncionarioPresenter();
                    view.dispose();
@@ -77,15 +81,16 @@ public class ManterFuncionarioPresenter {
     }
     
     
-    public void cadastrarFuncionario() throws SQLException{
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public void cadastrarFuncionario() throws SQLException, ParseException{
+        //Date formato = Date.of
+        //String formato = ("dd/MM/yyyy"); 
         String nome = view.getTxtNome().getText();
         int idade = Integer.parseInt(view.getTxtIdade().getText());
         double salario = Float.parseFloat(view.getTxtSalario().getText());
         String cargo = view.getCbCargo().getSelectedItem().toString();
         String bonusSelecionado = view.getCbBonus().getSelectedItem().toString();
-        String dataA = view.getTxtAdmissao().getText();
-        LocalDate dataAdmissao = LocalDate.parse(dataA, formatter);
+        String dataAdmissao = view.getTxtAdmissao().getText();
+        //Date dataAdmissao = new SimpleDateFormat(formato).parse(dataA);
         Date data = new Date();
         Bonus bonus = new Bonus(bonusSelecionado, data);
         Funcionario funcionario = new Funcionario(nome, idade, salario, cargo, dataAdmissao, bonus);
