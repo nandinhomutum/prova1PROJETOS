@@ -1,23 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.UFES.prova1.DAO;
 
 import com.UFES.prova1.Model.Funcionario;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.dateTime;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
  * @author nandi
  */
-public class FuncionarioDAO {
+public class FuncionarioDAO implements DAOInterface<Funcionario>{
     private static FuncionarioDAO INSTANCE;
     private Funcionario funcionario;
+    Connection conn = Conexao.getInstance().connect();
 
     public FuncionarioDAO() {
         
@@ -34,22 +35,43 @@ public class FuncionarioDAO {
         }
     }
     
-    public void addFuncionario(Funcionario user){
+    @Override
+    public Funcionario get(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Funcionario get(String str) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save(Funcionario funcionario) throws SQLException {
+
+        String sql = "INSERT INTO FUNCIONARIO (nomeFuncionario, idadeFuncionario, salarioBaseFuncionario, cargo, dataAdmissaoFuncionario) VALUES (?,?,?,?,?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
         
-        Conexao conexao = (Conexao) new Conexao().connect(); 
-        PreparedStatement sql;
+        stmt.setString(1, funcionario.getNome().toUpperCase());
+        stmt.setInt(2, funcionario.getIdade());
+        stmt.setDouble(3, funcionario.getSalario());
+        stmt.setString(4, funcionario.getCargo().toUpperCase());
+        stmt.setDate(5,funcionario.getDataAdmissao());
+        stmt.execute(); 
+    }
 
-        try {
-            sql = conexao.connect().prepareStatement("insert into funcionario(idFuncionario, nomeFuncionario, idadeFuncionario, salarioBaseFuncionario, cargo, dataAdmissaoFuncionario) values ('" + user.getNome()+ "','" + user.getSalario()+  "','" + user.getCargo()+ "','" + user.getDataAdmissao()+ "')");
-            sql.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Usuário Cadastrado com Sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao inserir os dados ! \n ERRO" + ex);
-        } finally {
+    @Override
+    public void update(Funcionario obj) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    @Override
+    public void delete(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-        }
-
+    @Override
+    public ArrayList<Funcionario> getAll() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
         
 }

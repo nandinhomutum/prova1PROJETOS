@@ -8,6 +8,9 @@ package com.UFES.prova1.Presenter;
 import com.UFES.prova1.View.TelaBuscarFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,8 +46,13 @@ public class BuscarFuncionarioPresenter {
       
       view.getBtnNovo().addActionListener(new ActionListener() {
            
+           @Override
            public void actionPerformed(ActionEvent ae) {
+               try {
                    new ManterFuncionarioPresenter();
+               } catch (SQLException ex) {
+                   Logger.getLogger(BuscarFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
+               }
             } 
         });
       

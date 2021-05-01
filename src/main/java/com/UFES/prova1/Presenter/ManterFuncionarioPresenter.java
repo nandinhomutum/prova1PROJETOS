@@ -5,13 +5,22 @@
  */
 package com.UFES.prova1.Presenter;
 
+import com.UFES.prova1.DAO.CargoDAO;
 import com.UFES.prova1.DAO.FuncionarioDAO;
 import com.UFES.prova1.Model.Bonus;
+import com.UFES.prova1.Model.Cargo;
 import com.UFES.prova1.Model.Funcionario;
+import com.UFES.prova1.Utilidades.ManipuladorComboBox;
 import com.UFES.prova1.View.TelaManterFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +29,7 @@ import java.util.Date;
 public class ManterFuncionarioPresenter {
     TelaManterFuncionarioView view;
     
-    public ManterFuncionarioPresenter(){
+    public ManterFuncionarioPresenter() throws SQLException{
         configurarTela();
         
     view.getBtnFechar().addActionListener(new ActionListener() {
@@ -39,7 +48,11 @@ public class ManterFuncionarioPresenter {
     view.getBtnSalvar().addActionListener(new ActionListener() {
             @Override
           public void actionPerformed(ActionEvent ae) {
-                   cadastrarFuncionario();
+                try {
+                    cadastrarFuncionario();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ManterFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                }
                    new BuscarFuncionarioPresenter();
                    view.dispose();
             } 
@@ -55,25 +68,37 @@ public class ManterFuncionarioPresenter {
     
     }
     
-    private void configurarTela(){
+    private void configurarTela() throws SQLException{
         this.view = new TelaManterFuncionarioView();
+        BuscarCargo();
         this.view.setVisible(true);
        
     
     }
     
     
-    public void cadastrarFuncionario(){
-     
+    public void cadastrarFuncionario() throws SQLException{
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String nome = view.getTxtNome().getText();
         int idade = Integer.parseInt(view.getTxtIdade().getText());
         double salario = Float.parseFloat(view.getTxtSalario().getText());
         String cargo = view.getCbCargo().getSelectedItem().toString();
         String bonusSelecionado = view.getCbBonus().getSelectedItem().toString();
-        String dataAdmissao = view.getTxtAdmissao().getText();
+        LocalDateTime dataAdmissao = LocalDateTime.parse(view.getTxtAdmissao().getText(), formatter);
+        
+        //String text = dataAdmissao.format(formatter);
         Date data = new Date();
         Bonus bonus = new Bonus(bonusSelecionado, data);
         Funcionario funcionario = new Funcionario(nome, idade, salario, cargo, dataAdmissao, bonus);
-        FuncionarioDAO.getFuncionarioDAOInstance().addFuncionario(funcionario);
+        FuncionarioDAO.getFuncionarioDAOInstance().save(funcionario);
+    }
+    
+    public void BuscarCargo () throws SQLException{
+        ArrayList<String> cargos = new ArrayList<String>();
+        ArrayList<Cargo> cargoLista = CargoDAO.getCargoDAOInstance().getAll();
+        for(Cargo cargo : cargoLista){
+            cargos.add(cargo.getNome());
+        }
+        ManipuladorComboBox.getInstance().PreencherComboBox(cargos, view.getCbCargo());
     }
 }

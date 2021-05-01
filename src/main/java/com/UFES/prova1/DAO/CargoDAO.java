@@ -6,16 +6,21 @@
 package com.UFES.prova1.DAO;
 
 import com.UFES.prova1.Model.Cargo;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
  *
  * @author nandi
  */
-public class CargoDAO {
+public class CargoDAO implements DAOInterface<Cargo>{
+    
+    int id;
+    Connection conn = Conexao.getInstance().connect();
 
 private static CargoDAO INSTANCE;
  public CargoDAO() {
@@ -33,22 +38,51 @@ private static CargoDAO INSTANCE;
         }
     }
     
+@Override
     public ArrayList<Cargo> getAll() throws SQLException {
-        
-       String sql = "SELECT * FROM cargo";
-       ArrayList<Cargo> lista;
-    try (PreparedStatement ps = Conexao.getInstance().connect().prepareStatement(sql)) {
-        ResultSet rs = ps.executeQuery();
-        lista = new ArrayList<>();
-        while(rs.next()){
-            
-            Cargo cargo = new Cargo();
-            cargo.setId(rs.getInt("id"));
-            cargo.setNome(rs.getString("nome"));
-            lista.add(cargo);
-        }
-    }
-       return lista;
-       
+      ArrayList<Cargo> cargos = new ArrayList<Cargo>();
+       Statement stmt = conn.createStatement();
+       ResultSet rs = stmt.executeQuery("SELECT * FROM CARGO");
+       /*if(rs.next()){
+           Usuario usu = new Usuario(rs.getInt("CODUSU"), rs.getString("NOMEUSU"), rs.getString("PASS"), interpretador.interpreta(rs.getString("ADM")));
+           usu.setPermissoes(PermissoesDao.getInstance().get(rs.getInt("CODUSU")));
+           usuarios.add(usu);
+       }*/
+       while(rs.next()){
+         
+           //usu.setPermissoes(PermissoesDao.getInstance().get(rs.getInt("CODUSU")));
+           cargos.add(new Cargo(
+                   rs.getInt("id"),
+                  rs.getString("nome")
+           ));
+           
        }
+       stmt.close();
+       return cargos;
+       }
+
+    @Override
+    public Cargo get(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Cargo get(String str) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save(Cargo obj) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(Cargo obj) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

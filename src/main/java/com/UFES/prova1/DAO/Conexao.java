@@ -36,7 +36,7 @@ public class Conexao {
                 // create a connection to the database  
                 this.conn = DriverManager.getConnection(url);
 
-                System.out.println("Connection to SQLite has been established.");
+                System.out.println("Conectou ao banco");
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -49,7 +49,7 @@ public class Conexao {
         if (null != this.getConn()) {        
             try {                
               conn.close();
-              System.out.println("Disconected from SQLite.");
+              System.out.println("Desconectou do banco");
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -63,7 +63,7 @@ public class Conexao {
                 // create a connection to the database  
                 this.conn = DriverManager.getConnection(url);
 
-                System.out.println("Connection established.");
+                System.out.println("Conexao Estabelecida");
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

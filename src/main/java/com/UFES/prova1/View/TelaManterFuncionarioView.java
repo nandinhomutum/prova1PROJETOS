@@ -8,6 +8,7 @@ package com.UFES.prova1.View;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 /**
@@ -47,11 +48,11 @@ public class TelaManterFuncionarioView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cbFuncionarioMes = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        txtAdmissao = new javax.swing.JTextField();
         btnFechar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
+        txtAdmissao = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +66,7 @@ public class TelaManterFuncionarioView extends javax.swing.JFrame {
 
         jLabel4.setText("Bônus");
 
-        cbBonus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbBonus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NORMAL", "GENEROSO" }));
 
         jLabel5.setText("Salário");
 
@@ -238,11 +239,11 @@ public class TelaManterFuncionarioView extends javax.swing.JFrame {
         this.cbFuncionarioMes = cbFuncionarioMes;
     }
 
-    public JTextField getTxtAdmissao() {
+    public JFormattedTextField getTxtAdmissao() {
         return txtAdmissao;
     }
 
-    public void setTxtAdmissao(JTextField txtAdmissao) {
+    public void setTxtAdmissao(JFormattedTextField txtAdmissao) {
         this.txtAdmissao = txtAdmissao;
     }
 
@@ -298,7 +299,7 @@ public class TelaManterFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtAdmissao;
+    private javax.swing.JFormattedTextField txtAdmissao;
     private javax.swing.JTextField txtFaltas;
     private javax.swing.JTextField txtIdade;
     private javax.swing.JTextField txtNome;
