@@ -15,7 +15,7 @@ import com.UFES.prova1.View.TelaManterFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,15 +78,14 @@ public class ManterFuncionarioPresenter {
     
     
     public void cadastrarFuncionario() throws SQLException{
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String nome = view.getTxtNome().getText();
         int idade = Integer.parseInt(view.getTxtIdade().getText());
         double salario = Float.parseFloat(view.getTxtSalario().getText());
         String cargo = view.getCbCargo().getSelectedItem().toString();
         String bonusSelecionado = view.getCbBonus().getSelectedItem().toString();
-        LocalDateTime dataAdmissao = LocalDateTime.parse(view.getTxtAdmissao().getText(), formatter);
-        
-        //String text = dataAdmissao.format(formatter);
+        String dataA = view.getTxtAdmissao().getText();
+        LocalDate dataAdmissao = LocalDate.parse(dataA, formatter);
         Date data = new Date();
         Bonus bonus = new Bonus(bonusSelecionado, data);
         Funcionario funcionario = new Funcionario(nome, idade, salario, cargo, dataAdmissao, bonus);

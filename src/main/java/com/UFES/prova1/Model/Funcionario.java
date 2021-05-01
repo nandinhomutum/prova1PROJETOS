@@ -5,7 +5,7 @@
  */
 package com.UFES.prova1.Model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -20,9 +20,9 @@ public class Funcionario {
     private double salario;
     private String cargo;
     private ArrayList<Bonus> listaBonus = new ArrayList<>();
-    private LocalDateTime dataAdmissao;
+    private LocalDate dataAdmissao;
 
-    public Funcionario(String nome, int idade, double salario, String cargo, LocalDateTime dataAdmissao, Bonus bonus) {
+    public Funcionario(String nome, int idade, double salario, String cargo, LocalDate dataAdmissao, Bonus bonus) {
         this.nome = nome;
         this.idade = idade;
         this.salario = salario;
@@ -88,11 +88,11 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public LocalDateTime getDataAdmissao() {
+    public LocalDate getDataAdmissao() {
         return dataAdmissao;
     }
 
-    public void setDataAdmissao(LocalDateTime dataAdmissao) {
+    public void setDataAdmissao(LocalDate dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
 

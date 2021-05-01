@@ -2,12 +2,9 @@
 package com.UFES.prova1.DAO;
 
 import com.UFES.prova1.Model.Funcionario;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.dateTime;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -47,15 +44,17 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
 
     @Override
     public void save(Funcionario funcionario) throws SQLException {
-
+        System.out.println(funcionario.getDataAdmissao());
         String sql = "INSERT INTO FUNCIONARIO (nomeFuncionario, idadeFuncionario, salarioBaseFuncionario, cargo, dataAdmissaoFuncionario) VALUES (?,?,?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
+        
+        Date dataAdmissao = java.sql.Date.valueOf(funcionario.getDataAdmissao());
         
         stmt.setString(1, funcionario.getNome().toUpperCase());
         stmt.setInt(2, funcionario.getIdade());
         stmt.setDouble(3, funcionario.getSalario());
         stmt.setString(4, funcionario.getCargo().toUpperCase());
-        stmt.setDate(5,funcionario.getDataAdmissao());
+        stmt.setDate(5, (java.sql.Date) dataAdmissao);
         stmt.execute(); 
     }
 
