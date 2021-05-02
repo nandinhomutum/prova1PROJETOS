@@ -71,8 +71,8 @@ public class BuscarFuncionarioPresenter {
            
            public void actionPerformed(ActionEvent ae) {
                try {
-                   int id = pegarFuncionario();
-                   new AdicionarBonusPresenter(id);
+                   Funcionario funcionario = pegarFuncionario();
+                   new AdicionarBonusPresenter(funcionario);
                } catch (SQLException ex) {
                    Logger.getLogger(BuscarFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
                }
@@ -109,11 +109,11 @@ public class BuscarFuncionarioPresenter {
        view.getTbFuncionarios().setModel(tabela);
     }
     
-    public int pegarFuncionario() throws SQLException{
+    public Funcionario pegarFuncionario() throws SQLException{
         DefaultTableModel tabela = (DefaultTableModel) view.getTbFuncionarios().getModel();
         int linha = view.getTbFuncionarios().getSelectedRow();
         
-       return (int) view.getTbFuncionarios().getValueAt(linha, 0);
+       return FuncionarioDAO.getFuncionarioDAOInstance().get((int) view.getTbFuncionarios().getValueAt(linha, 0));
  
         
     }

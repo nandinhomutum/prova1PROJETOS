@@ -15,9 +15,11 @@ import com.UFES.prova1.View.TelaFuncionarioBonusView;
 public class AdicionarBonusPresenter {
 
     private TelaFuncionarioBonusView view;
+    private final Funcionario funcionario;
 
     public AdicionarBonusPresenter(Funcionario funcionario) {
         ConfigurarTela();
+        this.funcionario = funcionario;
         preencherTela(funcionario);
         
     }
