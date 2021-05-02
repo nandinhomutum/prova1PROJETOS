@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,13 +42,23 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
     
     @Override
     public Funcionario get(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM funcionario WHERE idFuncionario = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        if(!rs.next())
+             new JOptionPane().showMessageDialog(new JFrame(),"Funcionario Inválido!","Aviso",JOptionPane.WARNING_MESSAGE);
+        
+        rs = stmt.executeQuery(); 
+        Funcionario funcionarioSelecionado = new Funcionario(rs.getInt("idFuncionario"),
+                rs.getString("nomeFuncionario"),
+                rs.getInt("idadeFuncionario"),
+                rs.getDouble("salarioBaseFuncionario"),
+                rs.getString("cargo"),
+                rs.getString("dataAdmissaoFuncionario"));
+        return funcionario;
     }
 
-    @Override
-    public Funcionario get(String str) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void save(Funcionario funcionario) throws SQLException {

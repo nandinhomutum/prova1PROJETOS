@@ -8,6 +8,9 @@ package com.UFES.prova1.Presenter;
 import com.UFES.prova1.View.TelaPrincipalView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,7 +28,11 @@ public class PrincipalPresenter {
      view.getMenuBuscarFuncionario().addActionListener(new ActionListener() {
             @Override
            public void actionPerformed(ActionEvent ae) {
-                   new BuscarFuncionarioPresenter();
+                try {
+                    new BuscarFuncionarioPresenter();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PrincipalPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } 
         });
  

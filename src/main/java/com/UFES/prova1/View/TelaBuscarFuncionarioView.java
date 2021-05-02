@@ -31,6 +31,7 @@ public class TelaBuscarFuncionarioView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -40,6 +41,9 @@ public class TelaBuscarFuncionarioView extends javax.swing.JFrame {
         btnVisualizar = new javax.swing.JButton();
         btnBonus = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar Funcionário");
@@ -66,6 +70,8 @@ public class TelaBuscarFuncionarioView extends javax.swing.JFrame {
 
         btnNovo.setText("Novo");
 
+        btnAdicionar.setText("Adiciona Bônus");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,6 +82,8 @@ public class TelaBuscarFuncionarioView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnFechar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdicionar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -105,7 +113,8 @@ public class TelaBuscarFuncionarioView extends javax.swing.JFrame {
                     .addComponent(btnFechar)
                     .addComponent(btnNovo)
                     .addComponent(btnBonus)
-                    .addComponent(btnVisualizar))
+                    .addComponent(btnVisualizar)
+                    .addComponent(btnAdicionar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -175,13 +184,23 @@ public class TelaBuscarFuncionarioView extends javax.swing.JFrame {
         this.txtNome = txtNome;
     }
 
+    public JButton getBtnAdicionar() {
+        return btnAdicionar;
+    }
+
+    public void setBtnAdicionar(JButton btnAdicionar) {
+        this.btnAdicionar = btnAdicionar;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnBonus;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnVisualizar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbFuncionarios;

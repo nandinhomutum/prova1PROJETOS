@@ -13,8 +13,6 @@ public interface DAOInterface<T> {
 
     public T get(int id) throws SQLException;
 	
-    public T get(String str) throws SQLException;
-	
     public void save(T obj) throws SQLException;
 	
     public void update(T obj) throws SQLException;

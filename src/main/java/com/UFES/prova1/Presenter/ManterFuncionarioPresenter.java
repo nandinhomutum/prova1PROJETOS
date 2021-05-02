@@ -54,7 +54,11 @@ public class ManterFuncionarioPresenter {
                 } catch (ParseException ex) {
                     Logger.getLogger(ManterFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                   new BuscarFuncionarioPresenter();
+                try {
+                    new BuscarFuncionarioPresenter();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ManterFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                }
                    view.dispose();
             } 
         });

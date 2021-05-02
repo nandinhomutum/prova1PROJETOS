@@ -48,6 +48,13 @@ public class BuscarFuncionarioPresenter {
             } 
         });
       
+      view.getBtnVisualizar().addActionListener(new ActionListener() {
+           
+           public void actionPerformed(ActionEvent ae) {
+                   //view.dispose();
+            } 
+        });
+      
       view.getBtnNovo().addActionListener(new ActionListener() {
            
            @Override
@@ -60,10 +67,16 @@ public class BuscarFuncionarioPresenter {
             } 
         });
       
-      view.getBtnVisualizar().addActionListener(new ActionListener() {
+      view.getBtnAdicionar().addActionListener(new ActionListener() {
            
            public void actionPerformed(ActionEvent ae) {
-                   //view.dispose();
+               try {
+                   int id = pegarFuncionario();
+                   new AdicionarBonusPresenter(id);
+               } catch (SQLException ex) {
+                   Logger.getLogger(BuscarFuncionarioPresenter.class.getName()).log(Level.SEVERE, null, ex);
+               }
+                  
             } 
         });
     }
@@ -94,6 +107,15 @@ public class BuscarFuncionarioPresenter {
          
       }
        view.getTbFuncionarios().setModel(tabela);
+    }
+    
+    public int pegarFuncionario() throws SQLException{
+        DefaultTableModel tabela = (DefaultTableModel) view.getTbFuncionarios().getModel();
+        int linha = view.getTbFuncionarios().getSelectedRow();
+        
+       return (int) view.getTbFuncionarios().getValueAt(linha, 0);
+ 
+        
     }
     
 }
