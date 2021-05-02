@@ -112,8 +112,8 @@ public class BuscarFuncionarioPresenter {
     public Funcionario pegarFuncionario() throws SQLException{
         DefaultTableModel tabela = (DefaultTableModel) view.getTbFuncionarios().getModel();
         int linha = view.getTbFuncionarios().getSelectedRow();
-        
-       return FuncionarioDAO.getFuncionarioDAOInstance().get((int) view.getTbFuncionarios().getValueAt(linha, 0));
+        int id = (int) view.getTbFuncionarios().getValueAt(linha, 0);
+       return FuncionarioDAO.getFuncionarioDAOInstance().get(id);
  
         
     }

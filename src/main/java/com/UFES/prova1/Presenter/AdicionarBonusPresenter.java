@@ -20,6 +20,7 @@ public class AdicionarBonusPresenter {
     public AdicionarBonusPresenter(Funcionario funcionario) {
         ConfigurarTela();
         this.funcionario = funcionario;
+        System.out.println(funcionario);
         preencherTela(funcionario);
         
     }
@@ -30,12 +31,13 @@ public class AdicionarBonusPresenter {
     }
 
     private void preencherTela(Funcionario funcionario) {
+        
         view.getLblNome().setText(funcionario.getNome());
         view.getLblCargo().setText(funcionario.getNome());
         view.getLblDataAdmissao().setText(funcionario.getDataAdmissao());
         //view.getLblBonus().setText(funcionario.getListaBonus());
-        //view.getLblCargo().setText(funcionario.getNome());
-        //view.getLbId().setLabelFor(funcionario.getId());
+        view.getLblCargo().setText(funcionario.getCargo());
+        view.getLbId().setText("funcionario.getId()");
         
     }
     

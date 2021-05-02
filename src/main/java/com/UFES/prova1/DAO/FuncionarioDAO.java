@@ -56,7 +56,7 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
                 rs.getDouble("salarioBaseFuncionario"),
                 rs.getString("cargo"),
                 rs.getString("dataAdmissaoFuncionario"));
-        return funcionario;
+        return funcionarioSelecionado;
     }
 
 
